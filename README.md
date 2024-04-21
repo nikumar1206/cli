@@ -24,7 +24,7 @@ go run serve/main.go
 ```bash
 cd serve/
 go build -o serve
-sudo mv serve /usr/local/bin # requires elevated priviledges.
+sudo mv serve /usr/local/bin
 ```
 
 Once moved, you can just spin the server up via `serve`

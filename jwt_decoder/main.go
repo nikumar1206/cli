@@ -48,7 +48,7 @@ func main() {
 	payload := decodeAndIndent(jwtSections[1], "payload")
 
 	if includeHeaders {
-		fmt.Printf("HEADERS:\n%s\n", headersIndented)
+		fmt.Printf("\nHEADERS:\n%s\n", headersIndented)
 	}
 	fmt.Printf("\nPAYLOAD:\n%s\n", payload)
 

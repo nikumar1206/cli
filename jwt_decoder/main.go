@@ -30,7 +30,7 @@ func main() {
 	token := os.Args[1]
 	includeHeaders := false
 
-	if len(os.Args) > 2 && slices.Index(os.Args, "-h") > -1 {
+	if len(os.Args) > 2 && slices.Index(os.Args, "--headers") > -1 {
 		includeHeaders = true
 	}
 
@@ -62,7 +62,6 @@ func main() {
 		coloredExpiration := toColorRed(fmt.Sprintf("%f minutes", timeDiff/60))
 		fmt.Printf("Token expires in %s", coloredExpiration)
 	}
-
 }
 
 func decodeAndIndent(jwtSection, target string) string {
@@ -105,7 +104,7 @@ func decodeString(s string) ([]byte, error) {
 }
 
 func printUsage() {
-	fmt.Printf("Usage: %s <jwt_token_here> [-h]\n", os.Args[0])
+	fmt.Printf("Usage: %s <jwt_token_here> [--headers]\n", os.Args[0])
 	fmt.Println("Decodes the provided JWT token.")
 	fmt.Println("Flags:")
 
@@ -116,10 +115,9 @@ func printUsage() {
 }
 
 func matchHelp(osArgs []string) bool {
-	regex, err := regexp.Compile("(--help)|(--h)|(-h)")
+	regex, err := regexp.Compile(`\b(--help|--h|-h)\b`)
 	if err != nil {
 		log.Fatalln("Could not compile regex pattern")
-
 	}
 	matched := false
 	for _, ele := range osArgs {
@@ -127,7 +125,6 @@ func matchHelp(osArgs []string) bool {
 			matched = true
 			break
 		}
-
 	}
 	return matched
 }
